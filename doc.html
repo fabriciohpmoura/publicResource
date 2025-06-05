@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mapa com Rota</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+  <style>
+    #mapa { height: 100vh; width: 100vw; margin: 0; padding: 0; }
+    html, body { margin: 0; padding: 0; }
+  </style>
+</head>
+<body>
+  <div id="mapa"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.min.js"></script>
+
+  <script>
+    const mapa = L.map('mapa').setView([-23.3035, -51.168], 15); // Ponto central entre os dois
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(mapa);
+
+    // Coordenadas
+    const origem = L.latLng(-23.3031581, -51.1645541);
+    const destino = L.latLng(-23.3045582, -51.1732039);
+
+    // Rota
+    L.Routing.control({
+      waypoints: [origem, destino],
+      routeWhileDragging: false,
+      show: false,
+      addWaypoints: false,
+      draggableWaypoints: false
+    }).addTo(mapa);
+  </script>
+</body>
+</html>
